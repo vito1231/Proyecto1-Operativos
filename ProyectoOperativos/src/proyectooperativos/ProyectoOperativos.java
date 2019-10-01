@@ -19,11 +19,8 @@ public class ProyectoOperativos {
     public static void main(String[] args) {
         // TODO code application logic here
         Controller cont= new Controller();
-        cont.extractProcessesTXT("prueba.txt");
-        for(Process p:cont.getProcesos()){
-            System.out.println(p.toString());
-        }
         
+        cont.Menu();
        
     }
     
