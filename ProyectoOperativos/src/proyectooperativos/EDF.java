@@ -10,5 +10,6 @@ package proyectooperativos;
  * @author vicnb
  */
 public class EDF {
+    private int len;
     
 }

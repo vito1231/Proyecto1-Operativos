@@ -12,16 +12,21 @@ package proyectooperativos;
 public class Process {
     private int deadline;
     private int periodo;
+    private int exTime;
     private String name;
 
     public Process() {
     }
 
-    public Process(int deadline, int periodo, String name) {
+    public Process(int deadline, int periodo, int exTime, String name) {
         this.deadline = deadline;
         this.periodo = periodo;
+        this.exTime = exTime;
         this.name = name;
     }
+
+ 
+    
 
     public int getDeadline() {
         return deadline;
@@ -46,6 +51,18 @@ public class Process {
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getExTime() {
+        return exTime;
+    }
+
+    public void setExTime(int exTime) {
+        this.exTime = exTime;
+    }
     
-    
+       @Override
+    public String toString() {
+        return "Process{" + "deadline=" + deadline + ", periodo=" + periodo + ", exTime=" + exTime + ", name=" + name + '}';
+    }
+
 }
