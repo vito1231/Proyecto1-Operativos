@@ -34,7 +34,7 @@ public class SchedulingLogic
     {
         if(Queue.Tasks.isEmpty())
             return Status.Empty;
-        Task task = Tasks.get(1);
+        Task task = Queue.Tasks.get(1);
         if(++task.BurstTime % task.Period == 0)
         {
             Queue.Tasks.remove(1);
