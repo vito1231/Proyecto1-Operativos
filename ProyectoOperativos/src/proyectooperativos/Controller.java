@@ -64,7 +64,7 @@ public class Controller {
                               System.out.println(this.timeLineLen);
                               if(cParts[5].equals("EDF")){
                                   System.out.println(cParts[5]);
-                                  createEDF();
+                                  createEDF(timeLineLen);
                                   
                                   
                               }
@@ -104,8 +104,14 @@ public class Controller {
         System.out.println("******************************************************************************");
     }
     
-    public ArrayList createEDF(){
-        
+    public ArrayList createEDF(int len){
+        EDF edf= new EDF(len, procesos);
+        edf.crearProcesos();
+        edf.order();
+        ArrayList<Process> temp= edf.getQueue();
+        for(Process a:temp){
+            System.out.println(a.toString());
+        }
         return null;
     }
     public ArrayList createMonotonic(){
@@ -121,15 +127,11 @@ public class Controller {
             Process proce=new Process();
             proce.setName("P"+Integer.toString(cont));
             String[] parts = s.split(" ");
-            if(parts.length== 3){
-                proce.setExTime(Integer.parseInt(parts[0]));
-                proce.setDeadline(Integer.parseInt(parts[1]));
-                proce.setPeriodo(Integer.parseInt(parts[2]));
-            }
-            else{
-                proce.setExTime(Integer.parseInt(parts[0]));
-                proce.setPeriodo(Integer.parseInt(parts[1]));
-            }
+            proce.setExTime(Integer.parseInt(parts[0]));
+            proce.setDeadline(Integer.parseInt(parts[1]));
+            proce.setPeriodo(Integer.parseInt(parts[2]));
+            
+            
             procesos.add(proce);
             cont++;
         }

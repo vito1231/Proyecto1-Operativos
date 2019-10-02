@@ -6,6 +6,7 @@
 package proyectooperativos;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -19,8 +20,13 @@ public class ProyectoOperativos {
     public static void main(String[] args) {
         // TODO code application logic here
         Controller cont= new Controller();
+        cont.extractProcessesTXT("pruebaEDF.txt");
+        cont.createEDF(20);
         
-        cont.Menu();
+        
+        
+        
+        //cont.Menu();
        
     }
     
