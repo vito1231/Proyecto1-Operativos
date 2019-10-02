@@ -38,7 +38,7 @@ public class SchedulingLogic
         if(++task.BurstTime % task.Period == 0)
         {
             Queue.Tasks.remove(0);
-            if (task.EntryTime + task.Period <= TimeElapsed)
+            if (task.EntryTime + task.Period < TimeElapsed)
                 return Status.Missed;
             return Status.Complete;
         }
