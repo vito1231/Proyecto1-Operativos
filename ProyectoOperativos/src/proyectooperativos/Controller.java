@@ -107,10 +107,13 @@ public class Controller {
     public ArrayList createEDF(int len){
         EDF edf= new EDF(len, procesos);
         edf.crearProcesos();
-        edf.order();
-        ArrayList<Process> temp= edf.getQueue();
+        edf.distribuirProcesos();
+        ArrayList<Process> temp= edf.getProcesos();
         for(Process a:temp){
-            System.out.println(a.toString());
+            System.out.println(a.getName());
+            for(Process i: a.getQueue()){
+            System.out.println(i.toString());
+            }
         }
         return null;
     }
@@ -128,10 +131,8 @@ public class Controller {
             proce.setName("P"+Integer.toString(cont));
             String[] parts = s.split(" ");
             proce.setExTime(Integer.parseInt(parts[0]));
-            proce.setDeadline(Integer.parseInt(parts[1]));
             proce.setPeriodo(Integer.parseInt(parts[2]));
-            
-            
+            proce.setDeadline(Integer.parseInt(parts[2])-Integer.parseInt(parts[0]));
             procesos.add(proce);
             cont++;
         }

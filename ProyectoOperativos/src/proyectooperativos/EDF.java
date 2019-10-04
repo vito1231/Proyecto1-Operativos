@@ -14,14 +14,14 @@ import java.util.Collections;
  */
 public class EDF {
     private int len;
-    private String[] processLine;
+    private Process[] processLine;
     private ArrayList<Process> procesos;
     private ArrayList<Process> queue;
      
 
     public EDF(int len, ArrayList<Process> pro) {
         this.len = len;
-        processLine=new String[len];
+        processLine=new Process[len];
         procesos=pro;   
     }
 
@@ -30,6 +30,11 @@ public class EDF {
     }
 
     public void apply(){
+        ArrayList<Process> actuales= new ArrayList<Process>();
+        
+        for(int time=0;time<len;time++){
+            
+        }
         
     }
     
@@ -56,6 +61,18 @@ public class EDF {
         }
         queue=res;
     } 
+    
+    
+    public void distribuirProcesos(){
+        order();
+        for(Process p:queue){
+            for(Process temp: procesos){
+                if(temp.getName()==p.getName()){
+                    temp.getQueue().add(p);
+                }
+            }
+        }
+    }
 
     public ArrayList<Process> getQueue() {
         return queue;
@@ -87,11 +104,11 @@ public class EDF {
         this.len = len;
     }
 
-    public String[] getProcessLine() {
+    public Process[] getProcessLine() {
         return processLine;
     }
 
-    public void setProcessLine(String[] processLine) {
+    public void setProcessLine(Process[] processLine) {
         this.processLine = processLine;
     }
 

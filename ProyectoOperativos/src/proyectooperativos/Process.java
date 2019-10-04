@@ -5,6 +5,9 @@
  */
 package proyectooperativos;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  *
  * @author vicnb
@@ -18,8 +21,10 @@ public class Process {
     private int missedDeadLines;
     private int numProc;
     private Boolean processState;
+    private ArrayList<Process> queue;
 
     public Process() {
+        this.queue=new ArrayList<Process>();
     }
 
     public Process(int deadline, int periodo, int exTime, String name, int processBeg,int numProc,Boolean processState) {
@@ -30,6 +35,7 @@ public class Process {
         this.processBeg = processBeg;
         this.numProc= numProc;
         this.processState=processState;
+        this.queue=new ArrayList<Process>();
         
     }
 
@@ -102,6 +108,29 @@ public class Process {
         this.exTime = exTime;
     }
 
+    public ArrayList<Process> getQueue() {
+        return queue;
+    }
+
+    public void setQueue(ArrayList<Process> queue) {
+        this.queue = queue;
+    }
+    
+    
+    
+    public void order(){
+        for(int i=0; i< queue.size();i++){
+            int dead=queue.get(i).getDeadline();
+            for(int j=0; j<queue.size();j++){
+                if(queue.get(j).getDeadline() > queue.get(i).getDeadline()){
+                    Collections.swap(queue,i,j);
+                }
+            }
+            
+        }
+    }
+    
+    
     @Override
     public String toString() {
         return "Process{" + "deadline=" + deadline + ", periodo=" + periodo + ", exTime=" + exTime + ", name=" + name + ", numProc=" + numProc+ ", processState="+ processState + ", processBeg=" + processBeg + ", missedDeadLines=" + missedDeadLines + '}';
