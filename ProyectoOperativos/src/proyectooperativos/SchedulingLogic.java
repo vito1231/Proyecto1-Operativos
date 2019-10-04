@@ -34,11 +34,11 @@ public class SchedulingLogic
     {
         if(Queue.Tasks.isEmpty())
             return Status.Empty;
-        Task task = Queue.Tasks.get(1);
+        Task task = Queue.Tasks.get(0);
         if(++task.BurstTime % task.Period == 0)
         {
-            Queue.Tasks.remove(1);
-            if (task.EntryTime + task.Period <= TimeElapsed)
+            Queue.Tasks.remove(0);
+            if (task.EntryTime + task.Period < TimeElapsed)
                 return Status.Missed;
             return Status.Complete;
         }
