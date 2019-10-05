@@ -79,7 +79,7 @@ public class EDF {
         for(int time=0;time<len;time++){
             
             //System.out.println("");
-            System.out.println(time);
+            
             
            // System.out.print("Actuales");
             //System.out.println();
@@ -174,8 +174,7 @@ public class EDF {
             
             
                
-            System.out.println(processLine[time].getName());
-            System.out.println();
+            
         }
         
     }

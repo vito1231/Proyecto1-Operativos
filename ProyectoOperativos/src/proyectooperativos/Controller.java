@@ -113,12 +113,10 @@ public class Controller {
         edf.apply();
         Process[] lineatiempo=edf.getProcessLine();
         for(int i=0;i<lineatiempo.length;i++){
-            if(lineatiempo[i].equals(null)){
-                //System.out.println("NULL");
-            }
-            else{
-            //System.out.println(lineatiempo[i].toString());
-            }
+            
+            
+            System.out.println(lineatiempo[i].toString());
+            
         }
         return null;
     }

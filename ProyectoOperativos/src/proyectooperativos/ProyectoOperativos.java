@@ -20,8 +20,8 @@ public class ProyectoOperativos {
     public static void main(String[] args) {
         // TODO code application logic here
         Controller cont= new Controller();
-        cont.extractProcessesTXT("pruebaEDF.txt");
-        cont.createEDF(20);
+        //cont.extractProcessesTXT("pruebaEDF.txt");
+        //cont.createEDF(20);
         /*
         ArrayList<Process> n= new ArrayList<Process>();
         Process p1= new Process();
@@ -55,7 +55,8 @@ public class ProyectoOperativos {
         
         
         
-        //cont.Menu();
+        
+        cont.Menu();
        
     }
     
