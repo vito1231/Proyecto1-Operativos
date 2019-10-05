@@ -17,7 +17,8 @@ public class Controller {
     private ArrayList<Process> procesos;
     private String outputfile;
     private int timeLineLen;
-    
+    private Process[] resultadoAlgoritmo;
+     
     public Controller() {
         procesos=new ArrayList<Process>();
     }
@@ -104,7 +105,7 @@ public class Controller {
         System.out.println("******************************************************************************");
     }
     
-    public ArrayList createEDF(int len){
+    public void createEDF(int len){
         EDF edf= new EDF(len, procesos);
         edf.crearProcesos();
         edf.distribuirProcesos();
@@ -118,10 +119,11 @@ public class Controller {
             System.out.println(lineatiempo[i].toString());
             
         }
-        return null;
+        resultadoAlgoritmo=lineatiempo;
+        
     }
-    public ArrayList createMonotonic(){
-        return null;
+    public void createMonotonic(){
+        
     }
             
     public void extractProcessesTXT(String filename){
