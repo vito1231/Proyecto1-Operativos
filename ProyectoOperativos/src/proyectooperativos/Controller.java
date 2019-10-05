@@ -60,21 +60,21 @@ public class Controller {
                           else{
                               extractProcessesTXT(cParts[1]);
                               for(Process a: procesos){
-                                  System.out.println(a.toString());
+                               //   System.out.println(a.toString());
                               }
                               this.outputfile=cParts[3];
-                              System.out.println(this.outputfile);
+                             // System.out.println(this.outputfile);
                               this.timeLineLen=Integer.parseInt(cParts[7]);
-                              System.out.println(this.timeLineLen);
+                              //System.out.println(this.timeLineLen);
                               if(cParts[5].equals("EDF")){
-                                  System.out.println(cParts[5]);
+                                //  System.out.println(cParts[5]);
                                   createEDF(timeLineLen);
                                   createReportTXT();
                                   
                                   
                               }
                               else if (cParts[5].equals("Monotonic")){
-                                  System.out.println(cParts[5]);
+                                  //System.out.println(cParts[5]);
                                   createMonotonic();
                                   
                               }
@@ -117,14 +117,8 @@ public class Controller {
         
         edf.apply();
         Process[] lineatiempo=edf.getProcessLine();
-        for(int i=0;i<lineatiempo.length;i++){
-            
-            
-            System.out.println(lineatiempo[i].toString());
-            
-        }
-        this.
-        resultadoAlgoritmo=lineatiempo;
+        
+        this.resultadoAlgoritmo=lineatiempo;
         this.edf=edf;
         
     }
