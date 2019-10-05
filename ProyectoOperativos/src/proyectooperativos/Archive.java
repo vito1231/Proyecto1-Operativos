@@ -9,6 +9,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -52,9 +55,9 @@ public class Archive <E>{
         return lista;
     }
     
-    public void writeFile(ArrayList<E> x){
+    public void writeFile(ArrayList<String> x) throws IOException{
         
-        
-        
+        Path file = Paths.get(filename);
+        Files.write(file, x);
     }
 }

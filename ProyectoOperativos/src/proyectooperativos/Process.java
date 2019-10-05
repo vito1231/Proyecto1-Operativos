@@ -19,10 +19,12 @@ public class Process {
     private String name;
     private int processBeg;
     private int missedDeadLines;
+    private int cantPeriods;
     private int numProc;
     private Boolean processState;
     private ArrayList<Process> queue;
     private Boolean init;
+    
 
     public Process() {
         this.queue=new ArrayList<Process>();
@@ -139,6 +141,16 @@ public class Process {
             
         }
     }
+
+    public int getCantPeriods() {
+        return cantPeriods;
+    }
+
+    public void setCantPeriods(int cantPeriods) {
+        this.cantPeriods = cantPeriods;
+    }
+    
+    
 
     @Override
     public String toString() {

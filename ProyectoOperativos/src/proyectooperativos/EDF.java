@@ -185,6 +185,8 @@ public class EDF {
         String tempname;
         for(int i=0;i<procesos.size();i++){
             cantidadProcesos=(int) Math.ceil((float)this.len/procesos.get(i).getPeriodo());
+            int cantP=cantidadProcesos;
+            procesos.get(i).setCantPeriods(cantP);
             contUNO=1;
             contCERO=0;
             while(cantidadProcesos>0){

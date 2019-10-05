@@ -18,13 +18,16 @@ public class Controller {
     private String outputfile;
     private int timeLineLen;
     private Process[] resultadoAlgoritmo;
+    private EDF edf;
+    private ArrayList<String> report;
      
     public Controller() {
+        report= new ArrayList<String>();
         procesos=new ArrayList<Process>();
     }
    
     
-    public void Menu(){
+    public void Menu() throws IOException{
         Boolean flag=true;
         while(flag){
         System.out.println("************************************************");
@@ -66,6 +69,7 @@ public class Controller {
                               if(cParts[5].equals("EDF")){
                                   System.out.println(cParts[5]);
                                   createEDF(timeLineLen);
+                                  createReportTXT();
                                   
                                   
                               }
@@ -119,7 +123,9 @@ public class Controller {
             System.out.println(lineatiempo[i].toString());
             
         }
+        this.
         resultadoAlgoritmo=lineatiempo;
+        this.edf=edf;
         
     }
     public void createMonotonic(){
@@ -142,7 +148,45 @@ public class Controller {
             cont++;
         }
     }
-
+    
+    
+    
+    public void createReportTXT() throws IOException{
+        Archive txt= new Archive(outputfile);
+        
+        generarReporte();
+        txt.writeFile(report);
+        
+       
+    }
+    
+    public void generarReporte(){
+        report.add("\t Ex \t D \t P");
+        for(Process p: procesos){
+            String s= "";
+            s=s+ p.getName() + "\t" + p.getExTime()+"\t" + (p.getPeriodo() - p.getExTime()) +"\t" + p.getPeriodo();
+            report.add(s);
+        }
+        report.add("\n \n Respuesta \n");
+        report.add("Time \t Process");
+        for(int time=0;time<resultadoAlgoritmo.length;time++){
+            String s="";
+            s=s+ time +"\t"+ resultadoAlgoritmo[time].getName();
+            report.add(s);
+        }
+        
+        report.add("\n \n Estadisticas \n\n");
+        
+        for(Process p:edf.getProcesos()){
+            String s="";
+            s=s+p.getName()+ ": \n \t Missed Deadlines: " + p.getMissedDeadLines()+ "\n \t Cantidad de Periodos: " + p.getCantPeriods()
+                    + "\n \t Cant Periodos Logrados: " + (p.getCantPeriods() - p.getMissedDeadLines())+ "\n \t Cant Periodos Perdidos: "+ p.getMissedDeadLines(); 
+            report.add(s);
+        }
+        
+    }
+    
+    
     public ArrayList<Process> getProcesos() {
         return procesos;
     }
