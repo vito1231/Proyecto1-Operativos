@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 package proyectooperativos;
+=======
+package Scheduling;
+
+import static Scheduling.RateMonotonicScheduling.ElapsedTime;
+
+>>>>>>> 575a1ea29589fa62abaec9f20a658bea572da6b4
 /*
  * @author Jefferson Lezcano
 */
@@ -6,18 +13,22 @@ public class Task
 {
     public int Id;
     public int ArrivalTime;
-    public int BurstTime;
     public int EntryTime;
     public int ExecutionTime;
+    public int MissedDeadline;
     public int Period;
+    public int PeriodCounter;
+    public int BurstTime;
     
     public Task(int id, int executionTime, int period)
     {
         Id = id;
-        ExecutionTime = executionTime;
-        Period = period;
-        ArrivalTime = TimeElapsed;
+        ArrivalTime = ElapsedTime;
         BurstTime = 0;
+        ExecutionTime = executionTime;
+        MissedDeadline = 0;
+        Period = period;
+        PeriodCounter = 0;
     }
     
     public String ToString()
@@ -26,6 +37,6 @@ public class Task
                 "Execution time: " + ExecutionTime + "\n" +
                 "Period: " + Period + "\n" +
                 "Arrival Time : " + ArrivalTime + "\n" +
-                "Burst Time : " + BurstTime + "\n";
+                "Total time executed : " + BurstTime + "\n";
     }
 }

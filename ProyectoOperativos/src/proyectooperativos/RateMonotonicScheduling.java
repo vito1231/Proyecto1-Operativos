@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 package proyectooperativos;
+=======
+package Scheduling;
+
+>>>>>>> 575a1ea29589fa62abaec9f20a658bea572da6b4
 import java.util.ArrayList;
 
 /*
@@ -15,12 +20,18 @@ public class RateMonotonicScheduling
     }
     
     public ArrayList<Task> Tasks;
+    private int Time;
+    public ArrayList<Integer> Timeline;
     private ArrayList<Task> Queue;
+    public static int ElapsedTime;
     
-    public RateMonotonicScheduling()
+    public RateMonotonicScheduling(int time)
     {
         Tasks = new ArrayList<>();
+        Time = time;
+        Timeline = new ArrayList<>();
         Queue = new ArrayList<>();
+        ElapsedTime = 0;
     }
     
     public void Add(Task task)
@@ -29,8 +40,9 @@ public class RateMonotonicScheduling
         for(i = 0; i < Queue.size(); i++)
             if (Queue.get(i).Period > task.Period)
                 break;
-        task.EntryTime = TimeElapsed;
-        Tasks.add(i, task);
+        task.EntryTime = ElapsedTime;
+        task.PeriodCounter++;
+        Queue.add(i, task);
     }
     
     public Status Execute()
@@ -41,7 +53,7 @@ public class RateMonotonicScheduling
         if(++task.BurstTime % task.ExecutionTime == 0)
         {
             Queue.remove(0);
-            if (task.EntryTime + task.Period < TimeElapsed)
+            if (task.EntryTime + task.Period < ElapsedTime)
                 return Status.Missed;
             return Status.Complete;
         }
@@ -50,29 +62,35 @@ public class RateMonotonicScheduling
     
     private boolean Predict(Task task)
     {
-        if((task.BurstTime / task.ExecutionTime + 1) * task.Period - TimeElapsed
+        if((task.BurstTime / task.ExecutionTime + 1) * task.Period - ElapsedTime
                 - (task.ExecutionTime - task.BurstTime % task.ExecutionTime) >= 0)
             return true;
         return false;
     }
     
-    public Status Run()
+    public void Run()
     {
-        for(TimeElapsed = 0; ;TimeElapsed++)
+        for(ElapsedTime = 0; ElapsedTime < Time; ElapsedTime++)
         {
             for (Task task : Tasks)
-                    if ((TimeElapsed - task.ArrivalTime) % task.Period == 0)
-                        Add(task);
+                if ((ElapsedTime - task.ArrivalTime) % task.Period == 0)
+                    Add(task);
+            if (Queue.isEmpty())
+            {
+                Timeline.add(-1);
+                continue;
+            }
             Task task = Queue.get(0);
             while(!Predict(task))
             {
+                task.MissedDeadline++;
                 Queue.remove(0);
-                Tasks.remove(task);
                 if (Queue.isEmpty())
                     break;
                 task = Queue.get(0);
             }
-            return Execute();
+            Timeline.add(task.Id);
+            Execute();
         }
     }
     
@@ -80,7 +98,15 @@ public class RateMonotonicScheduling
     {
         ArrayList<Task> result = new ArrayList<>();
         for(Process process : processes)
-            result.add(new Task(process.numProc, process.exTime, process.periodo));
+            result.add(new Task(process.getNumProc(), process.getExTime(), process.getPeriodo()));
+        return result;
+    }
+    
+    public static ArrayList<Process> ToProcessList(ArrayList<Task> Tasks)
+    {
+        ArrayList<Process> result = new ArrayList<>();
+        for(Task task : Tasks)
+            result.add(new Process(0, task.Period, task.ExecutionTime, "", 0, task.Id, true, true));
         return result;
     }
 }
