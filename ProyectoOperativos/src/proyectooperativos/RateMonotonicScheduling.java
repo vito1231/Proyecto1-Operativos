@@ -1,5 +1,3 @@
-package Scheduling;
-
 import java.util.ArrayList;
 
 /*
