@@ -22,12 +22,13 @@ public class Process {
     private int numProc;
     private Boolean processState;
     private ArrayList<Process> queue;
+    private Boolean init;
 
     public Process() {
         this.queue=new ArrayList<Process>();
     }
 
-    public Process(int deadline, int periodo, int exTime, String name, int processBeg,int numProc,Boolean processState) {
+    public Process(int deadline, int periodo, int exTime, String name, int processBeg,int numProc,Boolean processState, Boolean  init) {
         this.deadline = deadline;
         this.periodo = periodo;
         this.exTime = exTime;
@@ -36,7 +37,16 @@ public class Process {
         this.numProc= numProc;
         this.processState=processState;
         this.queue=new ArrayList<Process>();
+        this.init= init;
         
+    }
+
+    public Boolean getInit() {
+        return init;
+    }
+
+    public void setInit(Boolean init) {
+        this.init = init;
     }
 
     public Boolean getProcessState() {
@@ -129,12 +139,13 @@ public class Process {
             
         }
     }
-    
-    
+
     @Override
     public String toString() {
-        return "Process{" + "deadline=" + deadline + ", periodo=" + periodo + ", exTime=" + exTime + ", name=" + name + ", numProc=" + numProc+ ", processState="+ processState + ", processBeg=" + processBeg + ", missedDeadLines=" + missedDeadLines + '}';
+        return "Process{" + "deadline=" + deadline + ", periodo=" + periodo + ", exTime=" + exTime + ", name=" + name + ", processBeg=" + processBeg + ", missedDeadLines=" + missedDeadLines + ", numProc=" + numProc + ", processState=" + processState + ", queue=" + queue + ", init=" + init + '}';
     }
     
+    
+   
 
 }

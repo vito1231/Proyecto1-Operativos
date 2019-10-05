@@ -109,10 +109,15 @@ public class Controller {
         edf.crearProcesos();
         edf.distribuirProcesos();
         ArrayList<Process> temp= edf.getProcesos();
-        for(Process a:temp){
-            System.out.println(a.getName());
-            for(Process i: a.getQueue()){
-            System.out.println(i.toString());
+        
+        edf.apply();
+        Process[] lineatiempo=edf.getProcessLine();
+        for(int i=0;i<lineatiempo.length;i++){
+            if(lineatiempo[i].equals(null)){
+                //System.out.println("NULL");
+            }
+            else{
+            //System.out.println(lineatiempo[i].toString());
             }
         }
         return null;
